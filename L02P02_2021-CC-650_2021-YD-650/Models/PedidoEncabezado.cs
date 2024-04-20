@@ -12,6 +12,7 @@ public partial class PedidoEncabezado
     public int? CantidadLibros { get; set; }
 
     public decimal? Total { get; set; }
+    public string? estado {  get; set; }
 
     public virtual Cliente? IdClienteNavigation { get; set; }
 
