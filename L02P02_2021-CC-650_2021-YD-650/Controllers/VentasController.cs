@@ -35,15 +35,15 @@ namespace L02P02_2021_CC_650_2021_YD_650.Controllers
                 Encabezado.IdCliente = idCliente;
                 Encabezado.Total = 0;
                 Encabezado.CantidadLibros = 0;
-                Encabezado.Estado = "P";
+                Encabezado.estado = "P";
                 _libreriaDbContext.Add(Encabezado);
                 _libreriaDbContext.SaveChanges();
                 int idEncabezado = _libreriaDbContext.PedidoEncabezados.Select(c => (int?)c.Id).Max() ?? 0; // Obtener el id del encabezado
                 Encabezado = _libreriaDbContext.PedidoEncabezados.FirstOrDefault(e => e.Id == idEncabezado);
                 Cliente = _libreriaDbContext.Clientes.FirstOrDefault(e => e.Id == idCliente);
-                Debug.WriteLine(Encabezado.Id + Encabezado.Estado + Encabezado.IdCliente);
+                Debug.WriteLine(Encabezado.Id + Encabezado.estado + Encabezado.IdCliente);
                 Debug.WriteLine(Cliente.Id + Cliente.Nombre);
-                return RedirectToAction("ListaLibros");
+                return RedirectToAction("ListadoLibro");
             }
             catch (Exception ex)
             {
@@ -56,13 +56,13 @@ namespace L02P02_2021_CC_650_2021_YD_650.Controllers
             return RedirectToAction("confirmVenta");
         }
 
-        public IActionResult ListaLibros()
+        public IActionResult ListadoLibros()
         {
             if (Encabezado == null || Cliente == null)
             {
                 return RedirectToAction("Index");
             }
-            var listaLibros = (from e in _libreriaDbContext.Libros
+            var listadoLibros = (from e in _libreriaDbContext.Libros
                                join a in _libreriaDbContext.Autores on e.IdAutor equals a.Id
                                select new
                                {
@@ -71,18 +71,18 @@ namespace L02P02_2021_CC_650_2021_YD_650.Controllers
                                    autor = a.Autor,
                                    precio = e.Precio
                                }).ToList();
-            ViewData["listaLibros"] = listaLibros;
+            ViewData["listadoLibros"] = listadoLibros;
             ViewBag.cabeza = Encabezado;
             return View();
         }
 
-        public IActionResult confirmVenta()
+        public IActionResult confirmarVenta()
         {
             if (Encabezado == null || Cliente == null)
             {
                 return RedirectToAction("Index");
             }
-            var listaCarro = (from e in _libreriaDbContext.PedidoDetalle
+            var listaCarrito = (from e in _libreriaDbContext.PedidoDetalles
                               join cab in _libreriaDbContext.PedidoEncabezados on e.IdPedido equals cab.Id
                               join l in _libreriaDbContext.Libros on e.IdLibro equals l.Id
                               join a in _libreriaDbContext.Autores on l.IdAutor equals a.Id
@@ -93,7 +93,7 @@ namespace L02P02_2021_CC_650_2021_YD_650.Controllers
                                   autor = a.Autor,
                                   precio = l.Precio
                               }).ToList();
-            ViewData["listaCarro"] = listaCarro;
+            ViewData["listadodeCarrito"] = listaCarrito;
             ViewBag.cliente = Cliente;
             ViewBag.cabezon = Encabezado;
             return View();
@@ -123,7 +123,7 @@ namespace L02P02_2021_CC_650_2021_YD_650.Controllers
             PedidoEncabezado alterPedi = _libreriaDbContext.PedidoEncabezados.FirstOrDefault(e => e.Id == Encabezado.Id);
             if (alterPedi != null)
             {
-                alterPedi.Estado = "C";
+                alterPedi.estado = "C";
                 _libreriaDbContext.Entry(alterPedi).State = EntityState.Modified;
                 _libreriaDbContext.SaveChanges();
             }

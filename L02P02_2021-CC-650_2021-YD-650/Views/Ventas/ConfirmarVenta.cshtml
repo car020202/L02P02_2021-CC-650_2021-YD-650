@@ -1,0 +1,78 @@
+﻿@{
+    PedidoEncabezado encabezado = ViewBag.encabezado;
+    Cliente cliente = ViewBag.cliente;
+
+
+}
+<main class="d-flex flex-wrap">
+    <section class="col-sm-12 col-md-7">
+        <h1>Proceso de Venta</h1>
+        <br />
+
+        <h3>Datos del cliente</h3>
+
+        <form asp-action="IniciarVenta" method="post">
+            <div class="form-group row mb-4">
+
+                <div class="col-sm-6">
+                    @Html.Label("Nombre")
+                    @Html.TextBox("nombre", cliente.Nombre, new { @class = "form-control", @readonly = "readonly" })
+                    <br />
+                </div>
+                <div class="col-sm-6">
+                    @Html.Label("Apellido")
+                    @Html.TextBox("apellido", cliente.Apellido, new { @class = "form-control", @readonly = "readonly" })
+                    <br />
+                </div>
+                <div class="col-sm-12">
+                    @Html.Label("Email")
+                    @Html.TextBox("email", cliente.Email, new { @class = "form-control", @readonly = "readonly" })
+                    <br />
+                </div>
+                <div class="col-sm-12">
+                    @Html.Label("Dirección")
+                    @Html.TextBox("Dirección", cliente.Direccion, new { @class = "form-control", @readonly = "readonly" })
+                    <br />
+                </div>
+            </div>
+        </form>
+    </section>
+    <section class="col-sm-12 col-md-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="text-primary text-start d-inline">Total libros</h3>
+            <h3 class="text-end"><span class="badge text-bg-primary rounded-circle d-inline  bg-primary align-self-end"> @encabezado.CantidadLibros </span></h3>
+        </div>
+        @foreach (var dato in (IEnumerable<dynamic>)ViewData["listadodeCarrito"])
+        {
+            <div class="row border border-1 border-secondary rounded-2 p-2 justify-content-between">
+                <section class="col-sm-6">
+                    <h4>@dato.nombre</h4>
+                    <h5>@dato.autor</h5>
+                </section>
+                <section class="col-sm-6">
+                    <h4 class="text-end">@dato.precio</h4>
+                </section>
+            </div>
+        }
+        <div class="row border border-1 border-secondary rounded-2 p-2 justify-content-between">
+            <section class="col-sm-6">
+                <h4>Total</h4>
+            </section>
+            <section class="col-sm-6">
+                <h4 class="text-end">@encabezado.Total</h4>
+            </section>
+        </div>
+        <div class="border border-1 border-secondary rounded-2 p-2">
+            <form asp-action="Finalizar" method="post">
+                <input type="submit" class="btn bg-success w-100 text-black" value="Cerrar Venta" />
+            </form>
+        </div>
+
+    </section>
+    @if (TempData["Mensaje"] != null)
+    {
+        <script>
+            alert('@TempData["Mensaje"]');
+        </script>
+    }
+</main>

@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    PedidoEncabezado encabezado = ViewBag.encabezado;
+}
+<main class="d-grid">
+    <br />
+    <div class="row">
+        <section class="col-md-7">
+            <h3 class="text-primary">Libros</h3>
+            @foreach (var libro in (IEnumerable<dynamic>)ViewData["ListadoLibro"])
+            {
+                <div class="row border border-1 border-secondary rounded-2 p-2 justify-content-between">
+                    <section class="col-sm-4">
+                        <h4>@libro.nombre</h4>
+                        <h5>@libro.autor</h5>
+                    </section>
+                    <section class="col-sm-4">
+                        <h4 class="text-center">@libro.precio</h4>
+                    </section>
+                    <section class="col-sm-4">
+                        <form asp-action="Agregar" method="post">
+                            <input type="hidden" name="id" value="@libro.id" />
+                            <input type="hidden" name="precio" value="@libro.precio" />
+                            <input type="submit" class="btn btn-success w-100 text-black" value="Agregar" />
+                        </form>
+                    </section>
+                </div>
+            }
+
+        </section>
+        <section class="col-md-5">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="text-primary text-start d-inline">Total libros</h3>
+                <h3 class="text-end"><span class="badge text-bg-primary rounded-circle d-inline  bg-primary align-self-end">@encabezado.CantidadLibros</span></h3>
+            </div>
+            <br />
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="text-primary text-start d-inline">Total (USD)</h4>
+                <h4 class="text-end"><strong>@encabezado.Total</strong></h4>
+            </div>
+            <br />
+            <form asp-action="MandarFin" method="post">
+                <div class="border border-1 border-secondary rounded-2 p-2">
+                    <input type="submit" class="btn btn-info w-100 text-black" value="Completar" />
+                </div>
+            </form>
+        </section>
+    </div>
+
+</main>
