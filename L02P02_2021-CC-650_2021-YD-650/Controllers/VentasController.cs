@@ -24,7 +24,7 @@ namespace L02P02_2021_CC_650_2021_YD_650.Controllers
             return View();
         }
 
-        public IActionResult IniciarVenta(Cliente cliente)
+        public IActionResult IniciarVentas(Cliente cliente)
         {
             try
             {
