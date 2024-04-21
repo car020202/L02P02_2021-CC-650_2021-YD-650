@@ -7,28 +7,84 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/L02P02_2021_CC_650_2021_YD_650.styles.css" asp-append-version="true" />
+    <style>
+        nav {
+            background-color: #111;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+            nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            nav li {
+                display: inline-block;
+                margin: 0 10px;
+            }
+
+            nav a {
+                color: #fff;
+                text-decoration: none;
+                font-family: sans-serif;
+                font-size: 16px;
+            }
+
+        .book-sale {
+            text-align: center;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+            .book-sale img {
+                width: 100%;
+                height: auto;
+            }
+
+            .book-sale h2 {
+                font-size: 24px;
+                margin-top: 20px;
+            }
+
+            .book-sale p {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            .book-sale a {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: #fff;
+                text-decoration: none;
+                font-size: 16px;
+            }
+
+
+
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">L02P02_2021_CC_650_2021_YD_650</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-blue">
+            <div class="book-sale">
+                <img src="@Url.Content("https://upload.wikimedia.org/wikipedia/commons/8/8e/UNICAES_Logo.png")" alt="UNICAES Logo" class="resized-image">
+
+                <h2>¡Venta de libros!</h2>
             </div>
         </nav>
+
+        <style>
+            .resized-image {
+                max-width: 100px; /* Adjust the width as needed */
+                height: auto; /* Maintains aspect ratio */
+            }
+        </style>
+
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -36,11 +92,26 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - L02P02_2021_CC_650_2021_YD_650 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer>
+        <p>2021-CC-650 - Jose Luis Calderon Cortez</p>
+        <p>2021-YD-650 - Carlos Antonio Yanez Delgado</p>
     </footer>
+    <style>
+        /* Estilos para el footer */
+        footer {
+            background-color: #111; /* Azul oscuro */
+            color: white; /* Texto blanco */
+            text-align: center; /* Centrar texto */
+            padding: 20px 0; /* Espaciado interno */
+            position: fixed; /* Fijar en la parte inferior */
+            width: 100%; /* Ancho completo */
+            bottom: 0; /* Colocar en la parte inferior */
+        }
+
+            footer p {
+                margin: 0; /* Eliminar margen para alinear */
+            }
+    </style>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
